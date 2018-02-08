@@ -208,6 +208,7 @@ static apr_status_t rpaf_cleanup(void *data) {
     rpaf_cleanup_rec *rcr = (rpaf_cleanup_rec *)data;
     rcr->r->DEF_IP = apr_pstrdup(rcr->r->connection->pool, rcr->old_ip);
     memcpy(rcr->r->DEF_ADDR, &rcr->old_addr, sizeof(apr_sockaddr_t));
+	apr_table_unset(rcr->r->connection->notes, "rpaf_https");	
     return APR_SUCCESS;
 }
 
